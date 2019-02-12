@@ -1,0 +1,16 @@
+branches:
+    only:
+        master
+stages:
+    - lint
+language: python
+python:
+- '3.6'
+install:
+    - pip install -r requirements.txt
+jobs:
+    include:
+        - stage: "lint"
+          name: "flake8"
+          script:
+              - flake8 .
