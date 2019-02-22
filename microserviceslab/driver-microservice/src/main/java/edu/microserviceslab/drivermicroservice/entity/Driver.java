@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity(name = "driver")
 public class Driver {
@@ -14,12 +15,19 @@ public class Driver {
     @Column(name = "id")
     private Long id;
 
+    @NotNull
     @Column(name = "first_name")
     private String firstName;
 
+    @NotNull
     @Column(name = "last_name")
     private String lastName;
 
+    @NotNull
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @NotNull
     @Column(name = "vehicle_id")
     private Long vehicleId;
 
@@ -47,6 +55,10 @@ public class Driver {
         this.lastName = lastName;
     }
 
+    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+
+    public String getPhoneNumber() { return this.phoneNumber; }
+
     public Long getVehicleId() {
         return vehicleId;
     }
@@ -67,6 +79,7 @@ public class Driver {
                 .append(id, driver.id)
                 .append(firstName, driver.firstName)
                 .append(lastName, driver.lastName)
+                .append(phoneNumber, driver.phoneNumber)
                 .append(vehicleId, driver.vehicleId)
                 .isEquals();
     }
@@ -77,6 +90,7 @@ public class Driver {
                 .append(id)
                 .append(firstName)
                 .append(lastName)
+                .append(phoneNumber)
                 .append(vehicleId)
                 .toHashCode();
     }
@@ -87,6 +101,7 @@ public class Driver {
                 .append("id", id)
                 .append("firstName", firstName)
                 .append("lastName", lastName)
+                .append( "phoneNumber", phoneNumber)
                 .append("vehicleId", vehicleId)
                 .toString();
     }

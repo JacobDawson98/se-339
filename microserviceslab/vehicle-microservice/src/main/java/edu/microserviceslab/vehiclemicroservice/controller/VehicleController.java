@@ -2,7 +2,6 @@ package edu.microserviceslab.vehiclemicroservice.controller;
 
 import edu.microserviceslab.vehiclemicroservice.entity.Vehicle;
 import edu.microserviceslab.vehiclemicroservice.service.interfaces.VehicleService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,10 +31,12 @@ public class VehicleController {
     @ResponseBody
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     public Vehicle addVehicle(@RequestBody Vehicle vehicle) {
-        if (vehicle == null) {
-            throw new IllegalStateException("Please submit a driver to add.");
+        if(vehicle == null) {
+            throw new IllegalStateException("Please submit vehicles to add.");
         }
-
+        if(vehicle.getRegistration() == null) {
+            throw new IllegalStateException("The vehicle needs to have registration.");
+        }
         return vehicleService.addVehicle(vehicle);
     }
 }

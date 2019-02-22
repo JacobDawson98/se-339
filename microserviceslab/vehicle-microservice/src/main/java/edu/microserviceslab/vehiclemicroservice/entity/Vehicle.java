@@ -23,7 +23,7 @@ public class Vehicle {
     @Column(name = "model_year")
     private Integer modelYear;
 
-    @OneToOne
+    @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "registration_id")
     private Registration registration;
 

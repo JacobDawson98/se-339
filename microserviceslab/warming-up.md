@@ -7,6 +7,10 @@
 2. (1 point) Look up Constructor Injection for Java Spring on
     the Internet. How are different classes passed to each
     together (or instantiated) in Spring?
+    * Different classes are passed to each other in Spring by
+      using service interfaces that are implemented by in the
+      associated service. Another controller would then import
+      that service.
 3. (1 point) Look up gradle build dependencies. Gradle is used
     primarily as a dependency management solution,
     and is used both in Spring Boot applications and in
