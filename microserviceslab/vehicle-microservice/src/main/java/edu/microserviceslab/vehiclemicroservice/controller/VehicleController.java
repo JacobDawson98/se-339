@@ -31,6 +31,12 @@ public class VehicleController {
     @ResponseBody
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     public Vehicle addVehicle(@RequestBody Vehicle vehicle) {
+        if(vehicle == null) {
+            throw new IllegalStateException("Please submit vehicles to add.");
+        }
+        if(vehicle.getRegistration() == null) {
+            throw new IllegalStateException("The vehicle needs to have registration.");
+        }
         return vehicleService.addVehicle(vehicle);
     }
 }

@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity(name = "driver")
 public class Driver {
@@ -14,15 +15,19 @@ public class Driver {
     @Column(name = "id")
     private Long id;
 
+    @NotNull
     @Column(name = "first_name")
     private String firstName;
 
+    @NotNull
     @Column(name = "last_name")
     private String lastName;
 
+    @NotNull
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @NotNull
     @Column(name = "vehicle_id")
     private Long vehicleId;
 
