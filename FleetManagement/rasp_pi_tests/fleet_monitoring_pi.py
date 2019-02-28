@@ -1,11 +1,11 @@
-import decimal
+# import decimal - never used
 import time
-import sys
+# import sys  - never used
 import argparse
-import threading
+# import threading - never used
 import can_interface
-#import gps_interface
-import config
+# import gps_interface
+# import config - never used
 from threading import Thread
 from api_engine import API_Engine
 from config import ConfigStore
@@ -16,8 +16,8 @@ class FleetMonitorApp(Thread):
         super(FleetMonitorApp, self).__init__()
 
     def startup(self):
-        result = True
-		
+        # result = True - never used
+
         vehicle = API_Engine().get_vehicle()
         print(vehicle["id"])
         vehicle["did"] = ConfigStore().get_did()
@@ -26,26 +26,26 @@ class FleetMonitorApp(Thread):
         # Check for PiCAN connection
         self.can = can_interface.CANHandler()
         self.can.startup()
-        
+
         '''
         # Activate this part if GPS is to be used
         Check for GPS connection
         #self.gps = gps_interface.GPSHandler()
-        #self.gps.startup() 
+        #self.gps.startup()
         '''
-        return True 
+        return True
 
     def run_hardware(self):
         self.can.start()
         self.can.join(None)
-        
+
         '''
         # This for GPS
         self.gps.start()
         self.gps.join(None)
         '''
         self.can.shutdown()
-		
+
     def run(self):
         while True:
             vehicle = API_Engine().get_vehicle()
@@ -54,11 +54,13 @@ class FleetMonitorApp(Thread):
             ConfigStore().set_vehicle(vehicle)
             time.sleep(60)
 
+
 def main():
     app = FleetMonitorApp()
     parser = argparse.ArgumentParser()
     parser.add_argument("-s", "--serverUri", dest="serverUri", type=str, help="the server URI to send requests to")
-    parser.add_argument("-d", "--driverID", dest="driverID", default=0, type=int, help="the ID of the driver using the vehicle")
+    parser.add_argument("-d", "--driverID", dest="driverID", default=0, type=int,
+                        help="the ID of the driver using the vehicle")
     parser.add_argument("-v", "--vehicleID", dest="vehicleID", default=0, type=int, help="the ID of this vehicle")
     parser.add_argument("-l", "--log", help="output API calls", action="store_true")
     args = parser.parse_args()
@@ -82,6 +84,7 @@ def main():
         time.sleep(5)
         print("Starting hardware")
         app.run_hardware()
+
 
 if __name__ == "__main__":
     main()

@@ -5,6 +5,7 @@ default_server = {'uri':  'http://127.0.0.1:8080'}
 
 default_mode = "test"
 
+
 class ConfigStore:
     class __Singleton:
         def __init__(self):

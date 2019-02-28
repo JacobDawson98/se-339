@@ -1,8 +1,9 @@
 import requests
-import json
+# import json - never used
 import time
 from config import ConfigStore
 from threading import Thread
+
 
 class API_Engine(Thread):
     class __Singleton:
@@ -22,18 +23,20 @@ class API_Engine(Thread):
 
     def run(self):
         while True:
-#	    print("*****send data *****")
+            print("*****send data *****")
             time.sleep(1)
             if self.instance.pid_data or self.instance.pos_data:
                 pids = []
                 for pid in self.instance.pid_data.items():
-                    pids.append({"pid":pid[0], "data":pid[1]})
+                    pids.append({"pid": pid[0], "data": pid[1]})
                 pid_body = {"vehicleId": ConfigStore().get_vid(), "pids": pids}
                 print("PID body" + str(pid_body))
                 if self.instance.pos_data:
-                    pid_body['latititude']  = self.instance.pos_data['latitude']
+                    pid_body['latititude'] = self.instance.pos_data['latitude']
                     pid_body['longitude'] = self.instance.pos_data['longitude']
-                result = self.do_request("post", url=ConfigStore().get_server_uri() + ':8082' + '/usage/add', body=pid_body)
+                result = self.do_request("post",
+                                         url=ConfigStore().get_server_uri() + ':8082' + '/usage/add',
+                                         body=pid_body)
                 print("++Send data++" + str(result.json()))
                 self.instance.pid_data = {}
                 self.instance.pos_data = {}
@@ -52,10 +55,10 @@ class API_Engine(Thread):
 
     def get_vehicle(self):
         result = self.do_request("get", url=ConfigStore().get_server_uri() + ':8080/vehicle/' + ConfigStore().get_vid())
-        print("hello",result.json())
+        print("hello", result.json())
         return result.json()
 
-    def do_request(self, type, url, body = {}):
+    def do_request(self, type, url, body={}):  # NOQA
         response = ""
         if self.instance.log:
             print(type + " " + url + " " + str(body))
@@ -64,7 +67,7 @@ class API_Engine(Thread):
             if type == "put":
                 response = requests.put(url=url, json=body)
             elif type == "post":
-	            response = requests.post(url=url, json=body)
+                response = requests.post(url=url, json=body)
             elif type == "delete":
                 if body:
                     response = requests.delete(url=url, json=body)
@@ -72,5 +75,5 @@ class API_Engine(Thread):
                     response = requests.delete(url=url)
             elif type == "get":
                 response = requests.get(url=url)
-                print("DEBUG:url",url,"response ", response)
+                print("DEBUG:url", url, "response ", response)
         return response
