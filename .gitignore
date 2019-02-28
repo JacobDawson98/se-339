@@ -181,6 +181,12 @@ dmypy.json
 
 Press h to open a hovercard with more details.
 
+# Begin se-339 custom ignores
 *.zip
 *.pdf
 *.DS_Store
+
+# Created by .ignore support plugin (hsz.mobi)
+.gradle/
+.idea/
+build/
