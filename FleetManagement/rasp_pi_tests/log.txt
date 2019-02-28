@@ -1,0 +1,16 @@
+----
+main
+try this
+first
+init enter
+def
+init exit
+init enter
+init exit
+init enter
+init exit
+run
+init enter
+init exit
+Call of getVehicle
+get http://35.193.191.2:8080/vehicle/init/5 {}

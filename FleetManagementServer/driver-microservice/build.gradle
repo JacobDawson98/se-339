@@ -1,0 +1,45 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+    }
+}
+
+group 'edu.microserviceslab.drivermicroservice'
+version '1.0'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.0.5.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.0.5.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-parent', version: '2.0.5.RELEASE'
+
+
+
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+    compile group: 'com.fasterxml', name: 'jackson-xml-databind', version: '0.6.2'
+
+    compile group: 'com.h2database', name: 'h2', version: '1.4.197'
+
+    compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
+    compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.2.11'
+    compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.2.11'
+    compile group: 'javax.activation', name: 'activation', version: '1.1.1'
+    compile group: 'org.javassist', name: 'javassist', version: '3.23.1-GA'
+    
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.0.5.RELEASE'
+}
