@@ -3,7 +3,7 @@ default_vehicle = {'vid': 1, 'did': 1, 'pids': [0x0D, 0x2F, 0x04, 0x05], 'bitrat
 
 default_server = {'uri':  'http://127.0.0.1:8080'}
 
-default_mode = "test"
+default_mode = 'test'
 
 
 class ConfigStore:

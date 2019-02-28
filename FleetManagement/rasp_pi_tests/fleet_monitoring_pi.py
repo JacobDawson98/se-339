@@ -19,8 +19,8 @@ class FleetMonitorApp(Thread):
         # result = True - never used
 
         vehicle = API_Engine().get_vehicle()
-        print(vehicle["id"])
-        vehicle["did"] = ConfigStore().get_did()
+        print(vehicle['id'])
+        vehicle['did'] = ConfigStore().get_did()
         ConfigStore().set_vehicle(vehicle)
 
         # Check for PiCAN connection
@@ -49,8 +49,8 @@ class FleetMonitorApp(Thread):
     def run(self):
         while True:
             vehicle = API_Engine().get_vehicle()
-            vehicle["vid"] = ConfigStore().get_vid()
-            vehicle["did"] = ConfigStore().get_did()
+            vehicle['vid'] = ConfigStore().get_vid()
+            vehicle['did'] = ConfigStore().get_did()
             ConfigStore().set_vehicle(vehicle)
             time.sleep(60)
 
@@ -58,14 +58,14 @@ class FleetMonitorApp(Thread):
 def main():
     app = FleetMonitorApp()
     parser = argparse.ArgumentParser()
-    parser.add_argument("-s", "--serverUri", dest="serverUri", type=str, help="the server URI to send requests to")
-    parser.add_argument("-d", "--driverID", dest="driverID", default=0, type=int,
-                        help="the ID of the driver using the vehicle")
-    parser.add_argument("-v", "--vehicleID", dest="vehicleID", default=0, type=int, help="the ID of this vehicle")
-    parser.add_argument("-l", "--log", help="output API calls", action="store_true")
+    parser.add_argument('-s', '--serverUri', dest='serverUri', type=str, help='the server URI to send requests to')
+    parser.add_argument('-d', '--driverID', dest='driverID', default=0, type=int,
+                        help='the ID of the driver using the vehicle')
+    parser.add_argument('-v', '--vehicleID', dest='vehicleID', default=0, type=int, help='the ID of this vehicle')
+    parser.add_argument('-l', '--log', help='output API calls', action='store_true')
     args = parser.parse_args()
     if args.serverUri:
-        server = {"uri": args.serverUri}
+        server = {'uri': args.serverUri}
         API_Engine().set_send(True)
         ConfigStore().set_server(server)
     else:
@@ -75,16 +75,16 @@ def main():
         API_Engine().set_logging(True)
     API_Engine().start()
     if args.vehicleID and args.driverID:
-        vehicle = {"vid": args.vehicleID}
-        vehicle["did"] = args.driverID
-        vehicle["pids"] = []
+        vehicle = {'vid': args.vehicleID}
+        vehicle['did'] = args.driverID
+        vehicle['pids'] = []
         ConfigStore().set_vehicle(vehicle)
     if app.startup():
         app.start()
         time.sleep(5)
-        print("Starting hardware")
+        print('Starting hardware')
         app.run_hardware()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

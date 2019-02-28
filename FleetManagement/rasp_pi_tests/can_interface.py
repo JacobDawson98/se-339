@@ -26,12 +26,12 @@ class CANHandler(Thread):
         self.api_engine = API_Engine()
 
     def startup(self):
-        os.system("sudo /sbin/ip link set can0 up type can bitrate " + str(ConfigStore().get_bitrate()))
+        os.system('sudo /sbin/ip link set can0 up type can bitrate ' + str(ConfigStore().get_bitrate()))
         time.sleep(0.1)
         return True
 
     def shutdown(self):
-        os.system("sudo /sbin/ip link set can0 down")
+        os.system('sudo /sbin/ip link set can0 down')
         time.sleep(0.1)
 
     def read_messages(self):
@@ -79,5 +79,5 @@ def main():
         can.shutdown()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

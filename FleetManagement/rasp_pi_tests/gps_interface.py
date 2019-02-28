@@ -10,7 +10,7 @@ class GPSHandler(Thread):
         self.api_engine = API_Engine()
 
     def startup(self):
-        self.session = gps.GPS("localhost", "2947")
+        self.session = gps.GPS('localhost', '2947')
         self.session.stream(gps.WATCH_ENABLE | gps.WATCH_NEWSTYLE)
         return True
 
@@ -31,5 +31,5 @@ def main():
         gps.api_engine.start()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
